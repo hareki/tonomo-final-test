@@ -1,0 +1,45 @@
+@theme inline {
+  --text-display: 5.5rem; /* 88px */
+  --text-display--line-height: 1;
+
+  --container-page: 77.5rem; /* 1240px */
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+
+  /* Brand fonts. The BrandProvider overrides `--font-sans` / `--font-heading`
+   * per agency; these defaults point at the IBM Plex Sans instance from the layout. */
+  --font-sans: var(--font-ibm-plex-sans);
+  --font-heading: var(--font-ibm-plex-sans);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+}
+
+:root {
+  --background: var(--color-white);
+  --foreground: #1e1e1e;
+
+  --muted: #d0d0d0;
+  --muted-foreground: var(--color-neutral-500);
+
+  /* Default brand primary; the BrandProvider overrides `--primary` per agency. */
+  --primary: var(--color-blue-600);
+  --primary-foreground: var(--color-white);
+
+  --border: var(--color-neutral-200);
+  --ring: var(--color-blue-600);
+
+  --radius: 0px;
+
+  color-scheme: light;
+}
