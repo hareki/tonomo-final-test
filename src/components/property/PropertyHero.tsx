@@ -19,6 +19,7 @@ export function PropertyHero({ property }: PropertyHeroProps) {
         alt={property.heroImageAlt}
         fill
         preload
+        fetchPriority='high'
         placeholder={typeof property.heroImage === 'string' ? 'empty' : 'blur'}
         sizes='100vw'
         quality={100}
