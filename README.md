@@ -1,36 +1,111 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Tonomo - Multi-tenant Property Landing Page
 
-## Getting Started
+A faithful, responsive implementation of the real-estate listing UI in the
+[Figma design](https://www.figma.com/design/vWjXCs58sFkrUqLCTGzv0R/Middle-developer-test?node-id=0-1):
+a full-bleed property hero with the listing address, a floating stats bar (Beds / Baths / Living
+Area / Lot Size / Offered at), a broker card, and a responsive nav that collapses to a drawer on
+smaller screens.
 
-First, run the development server:
+**Live demo:** https://tu-nguyen-tonomo-final-test.vercel.app/
+
+The app is built **white-label**: one set of components renders any agency's branding (logo, colors,
+fonts) from a config context, with no per-tenant component edits. See
+[Multi-tenant branding](#multi-tenant-branding) below.
+
+## Running locally
+
+Requires Node 20+ and [pnpm](https://pnpm.io).
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
+pnpm dev        # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Other scripts:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm build      # production build
+pnpm start      # serve the production build
+pnpm cleanup    # typecheck + format + lint
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Stack
 
-## Learn More
+- **Next.js 16** (App Router, React 19, React Compiler, Turbopack). Server Components keep the UI
+  off the client bundle; the small amount of interactivity (the mobile nav drawer) is the only
+  client code.
+- **Tailwind CSS v4**, driven by CSS custom properties. Brand tokens are plain CSS variables, which
+  is what makes per-tenant theming possible without touching components. The design is flat by
+  intent: `--radius: 0px` collapses the whole rounded scale.
+- **[`@base-ui/react`](https://base-ui.com)** and **[`vaul`](https://vaul.emilkowal.ski/)** for
+  headless component logic (the mobile nav drawer); all visual styling is hand-written.
+- **[`class-variance-authority`](https://cva.style/)** for typed component variants
+  (Button, NavLink).
+- **[`@tabler/icons-react`](https://tabler.io/icons)** for icons.
+- **[`next/font`](https://nextjs.org/docs/app/api-reference/components/font)** loads IBM Plex Sans as
+  the default brand typeface; an agency can swap in its own face through the brand config.
 
-To learn more about Next.js, take a look at the following resources:
+Styling is **mobile-first**: base classes target mobile, and below `lg` the header collapses from
+the full inline nav to a logo + Contact CTA + a hamburger that opens a nav drawer.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Architecture
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+src/
+  app/
+    layout.tsx        Root shell: fonts + BrandProvider, skip link, <main>
+    page.tsx          Home: renders PropertyLanding from the featured listing
+    icon.png          Favicon
+  branding/           Multi-tenant core: brands.ts (registry), BrandProvider,
+                      BrandContext, types.ts
+  components/
+    property/         PropertyLanding, PropertyHero, PropertyHeader, PropertyStats,
+                      BrokerCard, PropertyActions, NavMenuButton, nav-items.ts
+    ui/               Reusable primitives (Button, NavLink, NavMenu, Stat,
+                      Container, Drawer, Typography)
+    icons/            TonomoLogo
+    BrandLogo.tsx     Renders the active brand's logo from context
+  data/               index.ts (listing data + queries), types.ts, assets/
+  hooks/              useScrolled
+  lib/                tailwind/utils.ts (cn)
+  styles/             theme.css (tokens), utilities.css, view-transition.css, index.css
+```
 
-## Deploy on Vercel
+## Multi-tenant branding
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The same components render any agency's brand without forking. A brand is a `BrandConfig`
+(`src/branding/brands.ts`): an `id`, a display `name`, `colors` (primary / primary-foreground),
+`fonts` (sans / heading, as CSS-variable strings), and a `Logo` component.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+`BrandProvider` (`src/branding/BrandProvider.tsx`) resolves the active brand by `brandId` and paints
+its tokens as CSS custom properties (`--primary`, `--font-sans`, ...) on a `display: contents`
+wrapper, then shares the resolved brand through `BrandContext`. Utility classes like `bg-primary` and
+the body font re-theme per tenant with zero component edits.
+
+Only the serializable `brandId` crosses the server/client boundary; the logo component is resolved
+client-side from the registry. To onboard an agency you register a new `BrandConfig` in `brands.ts`
+(and load its font via `next/font`) => never by editing components.
+
+## Interactive effects and animations
+
+Optional per the brief, but a few touches were added to bring the UI to life. All motion is gated
+behind `prefers-reduced-motion`.
+
+- **Reveal animations.** On mount, the hero title and location fade in while sliding into place
+  (`revealing-left` / `revealing-right`). The `revealing-*` utilities in `src/styles/utilities.css`
+  compose a fade with a directional slide (left / right / top / bottom).
+- **Header link hover underline.** Nav links over the hero photo carry an underline that sweeps in
+  from the left on hover, animated with a scaling `::after` pseudo-element (the `link-underline`
+  utility), not a static border.
+- **Header dropdown menu.** Nav items with sub-pages (`NavMenu`, built on `@base-ui/react`) open a
+  keyboard-accessible dropdown of links that fades and zooms in on open.
+- **Mobile burger menu.** Below `lg`, the header collapses to a hamburger button (`NavMenuButton`)
+  that opens a left-sliding [`vaul`](https://vaul.emilkowal.ski/) drawer with the full navigation,
+  closing on selection.
+
+## Brand assets
+
+The **navbar wordmark** and the **favicon** (`src/app/icon.png`) are Tonomo's own brand assets,
+reused for this exercise; all rights reserved by Tonomo. The listing photos (hero and broker) are
+images from the Figma design, statically imported under `src/data/assets/` and served through `next/image`
+with generated blur placeholders.
