@@ -13,6 +13,61 @@ import { isNavGroup, PROPERTY_NAV } from './nav-items';
 import { NavMenuButton } from './NavMenuButton';
 import { ContactButton, DocumentsButton } from './PropertyActions';
 
+type HeaderTone = 'default' | 'inverse';
+
+/** Inline nav shown on wide viewports; collapses into the drawer below `xl`. */
+function DesktopNav({ tone }: { tone: HeaderTone }) {
+  return (
+    <nav
+      aria-label='Property sections'
+      className={`
+        hidden items-center gap-12
+        xl:flex
+      `}
+    >
+      {PROPERTY_NAV.map((entry) =>
+        isNavGroup(entry) ? (
+          <NavMenu key={entry.label} tone={tone} label={entry.label} items={entry.items} />
+        ) : (
+          <NavLink key={entry.label} tone={tone} href={entry.href}>
+            {entry.label}
+          </NavLink>
+        ),
+      )}
+    </nav>
+  );
+}
+
+/** Call-to-action cluster plus the drawer trigger for narrow viewports. */
+function HeaderActions({ tone }: { tone: HeaderTone }) {
+  return (
+    <div
+      className={`
+        flex items-center gap-3
+        sm:gap-4
+      `}
+    >
+      <DocumentsButton
+        tone={tone}
+        className={`
+          hidden
+          md:inline-flex
+        `}
+      />
+      <ContactButton
+        className={`
+          hidden
+          sm:inline-flex
+        `}
+      />
+
+      <div className='xl:hidden'>
+        <NavMenuButton tone={tone} />
+      </div>
+    </div>
+  );
+}
+
 export function PropertyHeader() {
   const scrolled = useScrolled();
   const tone = scrolled ? 'default' : 'inverse';
@@ -52,48 +107,9 @@ export function PropertyHeader() {
           />
         </Link>
 
-        <nav
-          aria-label='Property sections'
-          className={`
-            hidden items-center gap-12
-            xl:flex
-          `}
-        >
-          {PROPERTY_NAV.map((entry) =>
-            isNavGroup(entry) ? (
-              <NavMenu key={entry.label} tone={tone} label={entry.label} items={entry.items} />
-            ) : (
-              <NavLink key={entry.label} tone={tone} href={entry.href}>
-                {entry.label}
-              </NavLink>
-            ),
-          )}
-        </nav>
+        <DesktopNav tone={tone} />
 
-        <div
-          className={`
-            flex items-center gap-3
-            sm:gap-4
-          `}
-        >
-          <DocumentsButton
-            tone={tone}
-            className={`
-              hidden
-              md:inline-flex
-            `}
-          />
-          <ContactButton
-            className={`
-              hidden
-              sm:inline-flex
-            `}
-          />
-
-          <div className='xl:hidden'>
-            <NavMenuButton tone={tone} />
-          </div>
-        </div>
+        <HeaderActions tone={tone} />
       </Container>
     </header>
   );

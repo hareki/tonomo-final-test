@@ -16,9 +16,40 @@ import { Eyebrow } from '@/src/components/ui/Typography';
 import { isNavGroup, PROPERTY_NAV } from './nav-items';
 import { ContactButton, DocumentsButton } from './PropertyActions';
 
+import type { NavEntry } from './nav-items';
 import type { VariantProps } from 'class-variance-authority';
 
 type NavMenuButtonProps = Pick<VariantProps<typeof buttonVariants>, 'tone'>;
+
+/** A single drawer entry: a labelled group of links, or one link. */
+function NavDrawerItem({ entry }: { entry: NavEntry }) {
+  if (isNavGroup(entry)) {
+    const groupId = `nav-group-${entry.label.toLowerCase().replace(/\s+/g, '-')}`;
+
+    return (
+      <div role='group' aria-labelledby={groupId} className='flex flex-col gap-1'>
+        <Eyebrow id={groupId} className='px-3 pt-4 pb-1 text-muted-foreground'>
+          {entry.label}
+        </Eyebrow>
+        {entry.items.map((item) => (
+          <DrawerClose key={item.label} asChild>
+            <NavLink href={item.href} className='px-3 py-2.5'>
+              {item.label}
+            </NavLink>
+          </DrawerClose>
+        ))}
+      </div>
+    );
+  }
+
+  return (
+    <DrawerClose asChild>
+      <NavLink href={entry.href} className='px-3 py-2.5'>
+        {entry.label}
+      </NavLink>
+    </DrawerClose>
+  );
+}
 
 export function NavMenuButton({ tone = 'inverse' }: NavMenuButtonProps) {
   return (
@@ -48,39 +79,9 @@ export function NavMenuButton({ tone = 'inverse' }: NavMenuButtonProps) {
         </div>
 
         <nav aria-label='Property sections' className='flex flex-col gap-1 overflow-y-auto p-3'>
-          {PROPERTY_NAV.map((entry) => {
-            if (isNavGroup(entry)) {
-              const groupId = `nav-group-${entry.label.toLowerCase().replace(/\s+/g, '-')}`;
-
-              return (
-                <div
-                  key={entry.label}
-                  role='group'
-                  aria-labelledby={groupId}
-                  className='flex flex-col gap-1'
-                >
-                  <Eyebrow id={groupId} className='px-3 pt-4 pb-1 text-muted-foreground'>
-                    {entry.label}
-                  </Eyebrow>
-                  {entry.items.map((item) => (
-                    <DrawerClose key={item.label} asChild>
-                      <NavLink href={item.href} className='px-3 py-2.5'>
-                        {item.label}
-                      </NavLink>
-                    </DrawerClose>
-                  ))}
-                </div>
-              );
-            }
-
-            return (
-              <DrawerClose key={entry.label} asChild>
-                <NavLink href={entry.href} className='px-3 py-2.5'>
-                  {entry.label}
-                </NavLink>
-              </DrawerClose>
-            );
-          })}
+          {PROPERTY_NAV.map((entry) => (
+            <NavDrawerItem key={entry.label} entry={entry} />
+          ))}
 
           <div className='mt-3 flex flex-col gap-2'>
             <DrawerClose asChild>

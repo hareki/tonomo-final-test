@@ -2,7 +2,7 @@ import { TonomoLogo } from '@/src/components/icons/TonomoLogo';
 
 import type { BrandConfig } from './types';
 
-export const tonomoBrand: BrandConfig = {
+const tonomoBrand: BrandConfig = {
   id: 'tonomo',
   name: 'Tonomo',
   colors: {
