@@ -22,7 +22,7 @@ export function PropertyHero({ property }: PropertyHeroProps) {
         fetchPriority='high'
         placeholder={typeof property.heroImage === 'string' ? 'empty' : 'blur'}
         sizes='100vw'
-        quality={100}
+        quality={75}
         className='-z-10 object-cover object-right'
       />
 
