@@ -7,6 +7,8 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
+  --color-ink: var(--ink);
+
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
 
@@ -28,6 +30,10 @@
 :root {
   --background: var(--color-white);
   --foreground: #1e1e1e;
+
+  /* Brand-independent dark fill for solid CTAs (distinct from body-text --foreground
+   * and from the per-brand --primary). */
+  --ink: #22333b;
 
   --muted: #d0d0d0;
   --muted-foreground: var(--color-neutral-500);

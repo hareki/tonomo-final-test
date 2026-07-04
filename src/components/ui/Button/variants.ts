@@ -18,12 +18,12 @@ export const buttonVariants = cva(
         `,
         ghost: `
           border-transparent text-foreground
-          hover:bg-muted
+          hover:bg-white/15
           focus-visible:outline-ring
         `,
         solid: `
-          border-transparent bg-foreground text-background
-          hover:bg-foreground/90
+          border-transparent bg-ink text-background
+          hover:bg-ink/90
           focus-visible:outline-ring
         `,
       },
@@ -59,7 +59,6 @@ export const buttonVariants = cva(
         tone: 'inverse',
         class: `
           text-white
-          hover:bg-white/15
           focus-visible:outline-white
         `,
       },
