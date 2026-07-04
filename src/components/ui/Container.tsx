@@ -9,5 +9,18 @@ type ContainerProps = {
 
 /** Shared horizontal gutter so every page band aligns on the same axis. */
 export function Container({ className, children }: ContainerProps) {
-  return <div className={cn('mx-auto w-full max-w-page px-8', className)}>{children}</div>;
+  // Content width stretches as much as possible, capped at w-page, have gutter padding
+  return (
+    <div
+      className={cn(
+        `
+          mx-auto box-content w-[calc(100%-2*var(--gutter))] max-w-page px-(--gutter)
+          [--gutter:2rem]
+        `,
+        className,
+      )}
+    >
+      {children}
+    </div>
+  );
 }

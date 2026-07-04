@@ -11,10 +11,10 @@ type PropertyStatsProps = {
 
 export function PropertyStats({ stats, priceLabel, price }: PropertyStatsProps) {
   return (
-    <Container className='revealing-top bg-foreground/70 py-7 text-white'>
+    <Container className='revealing-top'>
       <div
         className='
-          flex flex-col gap-5
+          flex flex-col gap-5 bg-foreground/70 px-8 py-6 text-white
           md:flex-row md:items-start md:gap-12
         '
       >

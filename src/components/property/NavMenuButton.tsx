@@ -83,7 +83,7 @@ export function NavMenuButton({ tone = 'inverse' }: NavMenuButtonProps) {
             <NavDrawerItem key={entry.label} entry={entry} />
           ))}
 
-          <div className='mt-3 flex flex-col gap-2'>
+          <div className='mt-4 flex flex-col gap-3 px-2.5'>
             <DrawerClose asChild>
               <ContactButton
                 className='

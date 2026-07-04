@@ -16,7 +16,7 @@ export function PropertyLanding({ property }: PropertyLandingProps) {
 
       <section
         className={`
-          bg-background px-8 pb-8
+          bg-background pb-8
           sm:pb-12
           lg:pb-16
         `}

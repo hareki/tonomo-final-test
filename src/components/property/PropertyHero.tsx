@@ -13,7 +13,7 @@ type PropertyHeroProps = {
 
 export function PropertyHero({ property }: PropertyHeroProps) {
   return (
-    <section className='relative isolate flex h-[max(680px,70svh)] grow flex-col'>
+    <section className='relative isolate flex h-[max(680px,70svh)] grow flex-col justify-between'>
       <Image
         src={property.heroImage}
         alt={property.heroImageAlt}
@@ -30,23 +30,21 @@ export function PropertyHero({ property }: PropertyHeroProps) {
 
       <Container
         className='
-          relative pt-32
-          sm:pt-36
-          md:pt-40
-          lg:pt-44
+          relative pt-33
+          sm:pt-37
+          md:pt-41
+          lg:pt-45
         '
       >
-        <Display className='revealing-left text-white'>{property.name}</Display>
+        <Display className='mb-3 revealing-left text-white'>{property.name}</Display>
         <Lead className='revealing-right text-white'>{property.location}</Lead>
       </Container>
 
-      <div className='mt-auto px-8'>
-        <PropertyStats
-          stats={property.stats}
-          priceLabel={property.priceLabel}
-          price={property.price}
-        />
-      </div>
+      <PropertyStats
+        stats={property.stats}
+        priceLabel={property.priceLabel}
+        price={property.price}
+      />
     </section>
   );
 }

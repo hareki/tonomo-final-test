@@ -10,11 +10,17 @@ type StatProps = {
 /** A label-over-value figure. Must be rendered inside a `<dl>`. */
 export function Stat({ label, value, className }: StatProps) {
   return (
-    <div className={cn('flex flex-col gap-1', className)}>
-      <Body as='dt' className='md:text-right'>
+    <div className={cn('flex flex-col gap-3', className)}>
+      <Body as='dt' className='
+        whitespace-nowrap
+        md:text-right
+      '>
         {label}
       </Body>
-      <Figure as='dd' className='md:text-right'>
+      <Figure as='dd' className='
+        whitespace-nowrap
+        md:text-right
+      '>
         {value}
       </Figure>
     </div>

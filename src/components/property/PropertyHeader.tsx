@@ -82,34 +82,34 @@ export function PropertyHeader() {
         scrolled ? 'bg-background/50 backdrop-blur-md' : 'bg-transparent',
       )}
     >
-      <Container
-        className={`
-          flex items-center justify-between gap-4 py-4
-          sm:gap-6 sm:py-6
-        `}
-      >
-        <Link
-          href='/'
-          aria-label='Home'
-          className={cn(
-            `
-              focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4
-              focus-visible:outline-current
-            `,
-            scrolled ? 'text-foreground' : 'text-white',
-          )}
-        >
-          <BrandLogo
-            className={`
-              h-5 w-auto
-              sm:h-6
-            `}
-          />
-        </Link>
+      <Container className='
+        py-4
+        sm:py-6
+      '>
+        <div className='flex items-center justify-between'>
+          <Link
+            href='/'
+            aria-label='Home'
+            className={cn(
+              `
+                focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4
+                focus-visible:outline-current
+              `,
+              scrolled ? 'text-foreground' : 'text-white',
+            )}
+          >
+            <BrandLogo
+              className={`
+                h-5 w-auto
+                sm:h-6
+              `}
+            />
+          </Link>
 
-        <DesktopNav tone={tone} />
+          <DesktopNav tone={tone} />
 
-        <HeaderActions tone={tone} />
+          <HeaderActions tone={tone} />
+        </div>
       </Container>
     </header>
   );
