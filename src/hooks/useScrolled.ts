@@ -7,15 +7,26 @@ export function useScrolled(threshold = 16) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const update = () => {
-      setScrolled(window.scrollY > threshold);
-    };
+    // PERF: Use a sentinel pinned to the top of the document, `threshold` px tall.
+    // Once it scrolls fully out of view, scrollY has passed `threshold`.
 
-    update(); // sync initial state (restored scroll position / reload mid-page)
-    window.addEventListener('scroll', update, { passive: true });
+    // A 0px sentinel never intersects reliably, so keep it at least 1px tall.
+    const height = Math.max(1, threshold);
+
+    const sentinel = document.createElement('div');
+
+    sentinel.style.cssText = `position:absolute;top:0;left:0;width:1px;height:${height}px;pointer-events:none;visibility:hidden;`;
+    document.body.appendChild(sentinel);
+
+    const observer = new IntersectionObserver(([entry]) => {
+      setScrolled(!entry.isIntersecting);
+    });
+
+    observer.observe(sentinel);
 
     return () => {
-      window.removeEventListener('scroll', update);
+      observer.disconnect();
+      sentinel.remove();
     };
   }, [threshold]);
 
