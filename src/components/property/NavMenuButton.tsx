@@ -86,19 +86,19 @@ export function NavMenuButton({ tone = 'inverse' }: NavMenuButtonProps) {
           <div className='mt-4 flex flex-col gap-3 px-2.5'>
             <DrawerClose asChild>
               <ContactButton
-                className='
+                className={`
                   w-full
                   sm:hidden
-                '
+                `}
               />
             </DrawerClose>
             <DrawerClose asChild>
               <DocumentsButton
                 tone='default'
-                className='
+                className={`
                   w-full
                   md:hidden
-                '
+                `}
               />
             </DrawerClose>
           </div>

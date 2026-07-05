@@ -84,10 +84,10 @@ export function PropertyHeader() {
         scrolled ? 'bg-background/50 backdrop-blur-md' : 'bg-transparent',
       )}
     >
-      <Container className='
+      <Container className={`
         py-4
         sm:py-6
-      '>
+      `}>
         <div className='flex items-center justify-between'>
           <Link
             href={'/' as Route}
