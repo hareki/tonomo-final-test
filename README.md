@@ -54,8 +54,10 @@ the full inline nav to a logo + Contact CTA + a hamburger that opens a nav drawe
 src/
   app/
     layout.tsx        Root shell: fonts + BrandProvider, skip link, <main>
-    page.tsx          Home: renders PropertyLanding from the featured listing
+    properties/
+      [slug]/page.tsx Dynamic listing route: renders PropertyLanding for a slug
     icon.png          Favicon
+  proxy.ts            Redirects / to the featured listing's /properties/[slug]
   branding/           Multi-tenant core: brands.ts (registry), BrandProvider,
                       BrandContext, types.ts
   components/
@@ -67,8 +69,8 @@ src/
     BrandLogo.tsx     Renders the active brand's logo from context
   data/               index.ts (listing data + queries), types.ts, assets/
   hooks/              useScrolled
-  lib/                tailwind/utils.ts (cn)
-  styles/             theme.css (tokens), utilities.css, view-transition.css, index.css
+  lib/                format/utils.ts (number/price formatters), tailwind/utils.ts (cn)
+  styles/             theme.css (tokens), utilities.css, index.css
 ```
 
 ## Multi-tenant branding
