@@ -29,12 +29,12 @@ export function PropertyHero({ property }: PropertyHeroProps) {
       <PropertyHeader />
 
       <Container
-        className='
+        className={`
           relative pt-33
           sm:pt-37
           md:pt-41
           lg:pt-45
-        '
+        `}
       >
         <Display className='mb-3 revealing-left text-white'>{property.name}</Display>
         <Lead className='revealing-right text-white'>{property.location}</Lead>

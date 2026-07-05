@@ -1,12 +1,13 @@
 import { Stat } from '@/src/components/ui/Stat';
 import type { PropertyStat } from '@/src/data/types';
+import { formatNumber, formatPrice } from '@/src/lib/format/utils';
 
 import { Container } from '../ui/Container';
 
 type PropertyStatsProps = {
   stats: PropertyStat[];
   priceLabel: string;
-  price: string;
+  price: number;
 };
 
 export function PropertyStats({ stats, priceLabel, price }: PropertyStatsProps) {
@@ -26,12 +27,12 @@ export function PropertyStats({ stats, priceLabel, price }: PropertyStatsProps) 
           '
         >
           {stats.map((stat) => (
-            <Stat key={stat.label} label={stat.label} value={stat.value} />
+            <Stat key={stat.label} label={stat.label} value={formatNumber(stat.value)} />
           ))}
         </dl>
 
         <dl aria-label='Price' className='md:ml-auto'>
-          <Stat label={priceLabel} value={price} />
+          <Stat label={priceLabel} value={formatPrice(price)} />
         </dl>
       </div>
     </Container>

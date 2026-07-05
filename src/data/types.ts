@@ -1,12 +1,11 @@
 import type { StaticImageData } from 'next/image';
 
 /**
- * A single listing fact ("Beds" / "4"). Values are pre-formatted display
- * strings because formatting is a data concern, not a component one.
+ * A single listing fact ("Beds" / 4)
  */
 export type PropertyStat = {
   label: string;
-  value: string;
+  value: number;
 };
 
 /**
@@ -37,6 +36,6 @@ export type Property = {
   stats: PropertyStat[];
   /** The asking price is kept out of `stats`: it gets distinct emphasis. */
   priceLabel: string;
-  price: string;
+  price: number;
   broker: PropertyBroker;
 };

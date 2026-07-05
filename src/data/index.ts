@@ -12,13 +12,13 @@ export const baederwoodProperty: Property = {
   heroImage,
   heroImageAlt: 'Front exterior of 16926 Baederwood at dusk, with a lit pool in the foreground',
   stats: [
-    { label: 'Beds', value: '4' },
-    { label: 'Baths', value: '5' },
-    { label: 'Living Area', value: '4' },
-    { label: 'Lot Size', value: '11,000' },
+    { label: 'Beds', value: 4 },
+    { label: 'Baths', value: 5 },
+    { label: 'Living Area', value: 4 },
+    { label: 'Lot Size', value: 11000 },
   ],
   priceLabel: 'Offered at',
-  price: '$1,350,000',
+  price: 1350000,
   broker: {
     role: 'Lead Broker',
     agency: 'REMAX',
