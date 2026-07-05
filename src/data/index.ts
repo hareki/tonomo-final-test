@@ -6,7 +6,7 @@ import type { Property } from './types';
 // Real listing assets are co-located with this data module and statically
 // imported, so Next optimizes them and generates a blur placeholder.
 export const baederwoodProperty: Property = {
-  slug: 'baederwood-16926',
+  slug: '16926-baederwood',
   name: '16926 Baederwood',
   location: 'Rockville, Maryland 20855, USA',
   heroImage,
@@ -36,5 +36,5 @@ export function getPropertyBySlug(slug: string): Property | undefined {
   return properties.find((property) => property.slug === slug);
 }
 
-/** The listing the home page features until routing by slug lands. */
+/** The listing the home page redirects to (see `src/proxy.ts`). */
 export const featuredProperty = baederwoodProperty;

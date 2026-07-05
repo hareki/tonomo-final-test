@@ -13,6 +13,8 @@ import { isNavGroup, PROPERTY_NAV } from './nav-items';
 import { NavMenuButton } from './NavMenuButton';
 import { ContactButton, DocumentsButton } from './PropertyActions';
 
+import type { Route } from 'next';
+
 type HeaderTone = 'default' | 'inverse';
 
 /** Inline nav shown on wide viewports; collapses into the drawer below `xl`. */
@@ -88,7 +90,7 @@ export function PropertyHeader() {
       '>
         <div className='flex items-center justify-between'>
           <Link
-            href='/'
+            href={'/' as Route}
             aria-label='Home'
             className={cn(
               `
