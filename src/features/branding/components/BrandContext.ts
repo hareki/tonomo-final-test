@@ -2,7 +2,7 @@
 
 import { createContext, useContext } from 'react';
 
-import type { BrandConfig } from './types';
+import { type BrandConfig } from '../types';
 
 export const BrandContext = createContext<BrandConfig | null>(null);
 

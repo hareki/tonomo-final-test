@@ -11,16 +11,22 @@ type StatProps = {
 export function Stat({ label, value, className }: StatProps) {
   return (
     <div className={cn('flex flex-col gap-3', className)}>
-      <Body as='dt' className={`
-        whitespace-nowrap
-        md:text-right
-      `}>
+      <Body
+        as='dt'
+        className={`
+          whitespace-nowrap
+          md:text-right
+        `}
+      >
         {label}
       </Body>
-      <Figure as='dd' className={`
-        whitespace-nowrap
-        md:text-right
-      `}>
+      <Figure
+        as='dd'
+        className={`
+          whitespace-nowrap
+          md:text-right
+        `}
+      >
         {value}
       </Figure>
     </div>

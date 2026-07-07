@@ -1,9 +1,8 @@
 import Image from 'next/image';
 
+import { Container } from '@/src/components/ui/Container';
 import { Body, Figure } from '@/src/components/ui/Typography';
-import type { PropertyBroker } from '@/src/data/types';
-
-import { Container } from '../ui/Container';
+import type { PropertyBroker } from '@/src/features/property/data/types';
 
 type BrokerCardProps = {
   broker: PropertyBroker;

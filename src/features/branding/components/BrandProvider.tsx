@@ -3,7 +3,7 @@
 import type { CSSProperties, ReactNode } from 'react';
 
 import { BrandContext } from './BrandContext';
-import { getBrand } from './brands';
+import { getBrand } from '../data';
 
 type BrandProviderProps = {
   /** Serializable brand id, resolved against the registry in `brands.ts`. */

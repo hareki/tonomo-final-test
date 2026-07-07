@@ -1,6 +1,6 @@
 import { Fragment } from 'react/jsx-runtime';
 
-import type { Property } from '@/src/data/types';
+import type { Property } from '@/src/features/property/data/types';
 
 import { BrokerCard } from './BrokerCard';
 import { PropertyHero } from './PropertyHero';

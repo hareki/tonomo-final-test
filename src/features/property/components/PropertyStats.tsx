@@ -1,8 +1,7 @@
+import { Container } from '@/src/components/ui/Container';
 import { Stat } from '@/src/components/ui/Stat';
-import type { PropertyStat } from '@/src/data/types';
+import type { PropertyStat } from '@/src/features/property/data/types';
 import { formatNumber, formatPrice } from '@/src/lib/format/utils';
-
-import { Container } from '../ui/Container';
 
 type PropertyStatsProps = {
   stats: PropertyStat[];

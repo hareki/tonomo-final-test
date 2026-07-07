@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 
-import { PropertyLanding } from '@/src/components/property/PropertyLanding';
-import { getPropertyBySlug, properties } from '@/src/data';
+import { PropertyLanding } from '@/src/features/property/components/PropertyLanding';
+import { getPropertyBySlug, properties } from '@/src/features/property/data';
 
 import type { Metadata } from 'next';
 
@@ -13,9 +13,7 @@ export function generateStaticParams() {
   return properties.map((property) => ({ slug: property.slug }));
 }
 
-export async function generateMetadata({
-  params,
-}: PropertyPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: PropertyPageProps): Promise<Metadata> {
   const { slug } = await params;
   const property = getPropertyBySlug(slug);
 

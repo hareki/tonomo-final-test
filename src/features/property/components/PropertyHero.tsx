@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 import { Container } from '@/src/components/ui/Container';
 import { Display, Lead } from '@/src/components/ui/Typography';
-import type { Property } from '@/src/data/types';
+import type { Property } from '@/src/features/property/data/types';
 
 import { PropertyHeader } from './PropertyHeader';
 import { PropertyStats } from './PropertyStats';

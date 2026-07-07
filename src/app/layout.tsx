@@ -1,6 +1,6 @@
 import { IBM_Plex_Sans } from 'next/font/google';
 
-import { BrandProvider } from '@/src/branding/BrandProvider';
+import { BrandProvider } from '@/src/features/branding/components/BrandProvider';
 
 import type { Metadata } from 'next';
 import '../styles/index.css';

@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 
-import { BrandLogo } from '@/src/components/BrandLogo';
 import { Container } from '@/src/components/ui/Container';
 import { NavLink } from '@/src/components/ui/NavLink';
 import { NavMenu } from '@/src/components/ui/NavMenu';
@@ -12,6 +11,7 @@ import { cn } from '@/src/lib/tailwind/utils';
 import { isNavGroup, PROPERTY_NAV } from './nav-items';
 import { NavMenuButton } from './NavMenuButton';
 import { ContactButton, DocumentsButton } from './PropertyActions';
+import { BrandLogo } from '../../branding/components/BrandLogo';
 
 import type { Route } from 'next';
 
@@ -84,10 +84,12 @@ export function PropertyHeader() {
         scrolled ? 'bg-background/50 backdrop-blur-md' : 'bg-transparent',
       )}
     >
-      <Container className={`
-        py-4
-        sm:py-6
-      `}>
+      <Container
+        className={`
+          py-4
+          sm:py-6
+        `}
+      >
         <div className='flex items-center justify-between'>
           <Link
             href={'/' as Route}
