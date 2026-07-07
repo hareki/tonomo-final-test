@@ -58,16 +58,19 @@ src/
       [slug]/page.tsx Dynamic listing route: renders PropertyLanding for a slug
     icon.png          Favicon
   proxy.ts            Redirects / to the featured listing's /properties/[slug]
-  branding/           Multi-tenant core: brands.ts (registry), BrandProvider,
-                      BrandContext, types.ts
-  components/
-    property/         PropertyLanding, PropertyHero, PropertyHeader, PropertyStats,
+  features/
+    branding/         Multi-tenant core
+      components/     BrandProvider, BrandContext, BrandLogo
+      data.ts         Brand registry
+      types.ts
+    property/         Property listing feature
+      components/     PropertyLanding, PropertyHero, PropertyHeader, PropertyStats,
                       BrokerCard, PropertyActions, NavMenuButton, nav-items.ts
+      data/           index.ts (listing data + queries), types.ts, assets/
+  components/
     ui/               Reusable primitives (Button, NavLink, NavMenu, Stat,
                       Container, Drawer, Typography)
     icons/            TonomoLogo
-    BrandLogo.tsx     Renders the active brand's logo from context
-  data/               index.ts (listing data + queries), types.ts, assets/
   hooks/              useScrolled
   lib/                format/utils.ts (number/price formatters), tailwind/utils.ts (cn)
   styles/             theme.css (tokens), utilities.css, index.css
